@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+This module contains functions for processing data from Reddit API.
+"""
 import requests
 
 
