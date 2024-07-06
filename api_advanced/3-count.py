@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ reddit api"""
 
-import json
 import requests
 
 
