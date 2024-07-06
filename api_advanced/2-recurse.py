@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """
-Using reddit's API
+Script to query a list of all hot posts on a given Reddit subreddit.
 """
 import requests
 after = None
 
 
 def recurse(subreddit, hot_list=[]):
-    """returning top ten post titles recursively"""
+    """ Recursively retrieves a list of top 10 of titles of hot posts """
     global after
-    user_agent = {'User-Agent': 'api_advanced-project'}
+    user_agent = {'User-Agent': 'myRedditApp/0.0.1'}
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     parameters = {'after': after}
     results = requests.get(url, params=parameters, headers=user_agent,
