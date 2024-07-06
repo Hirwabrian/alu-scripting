@@ -1,27 +1,26 @@
 #!/usr/bin/python3
 """
-This module contains a function that recursively queries the Reddit API
-and returns a list containing the titles of all hot articles for a given subreddit.
-
-The function handles pagination using recursion and includes error handling for invalid subreddits.
-
-Functions:
-    recurse(subreddit, hot_list=[], after=None): Recursively fetches titles of hot articles for a subreddit.
+Script to query a list of all hot posts on a given Reddit subreddit.
 """
 
 import requests
 
+
 def recurse(subreddit, hot_list=[], after=None):
     """
-    Recursively queries the Reddit API and returns a list containing the titles of all hot articles for a given subreddit.
+    Recursively retrieves a list of titles of all hot posts
+    on a given subreddit.
 
     Args:
-        subreddit (str): The name of the subreddit to query.
-        hot_list (list): A list to store the hot article titles.
-        after (str): The pagination token to fetch the next set of results.
+        subreddit (str): The name of the subreddit.
+        hot_list (list, optional): List to store the post titles.
+                                    Default is an empty list.
+        after (str, optional): Token used for pagination.
+                                Default is an empty string.
+        count (int, optional): Current count of retrieved posts. Default is 0.
 
     Returns:
-        list: A list of titles of hot articles, or None if the subreddit is invalid.
+        list: A list of post titles from the hot section of the subreddit.
     """
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     params = {'after': after, 'limit': 100}
@@ -49,5 +48,5 @@ def recurse(subreddit, hot_list=[], after=None):
                 return hot_list
         else:
             return None
-    except requests.exceptions.RequestException:
+    except Exception as error:
         return None
