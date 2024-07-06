@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ 
-A script that recursively queries the Reddit API, parses the titles of all hot articles,
-and prints a sorted count of given keywords.
+module 3
 ""
 
 import requests
