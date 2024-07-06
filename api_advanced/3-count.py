@@ -26,7 +26,7 @@ def count_words(subreddit, word_list, after=None, word_count={}):
         for post in posts:
             title = post['data']['title'].lower().split()
             for word in title:
-                cleaned_word = ''.join(filter(str.isalpha, word))  # Remove non-alpha characters
+                cleaned_word = ''.join(filter(str.isalpha, word)) 
                 if cleaned_word in normalized_word_list:
                     if cleaned_word in word_count:
                         word_count[cleaned_word] += 1
