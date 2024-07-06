@@ -1,6 +1,15 @@
 #!/usr/bin/python3
-import requests
+"""
+This module contains a function that recursively queries the Reddit API
+and returns a list containing the titles of all hot articles for a given subreddit.
 
+The function handles pagination using recursion and includes error handling for invalid subreddits.
+
+Functions:
+    recurse(subreddit, hot_list=[], after=None): Recursively fetches titles of hot articles for a subreddit.
+"""
+
+import requests
 
 def recurse(subreddit, hot_list=[], after=None):
     """
@@ -14,21 +23,16 @@ def recurse(subreddit, hot_list=[], after=None):
     Returns:
         list: A list of titles of hot articles, or None if the subreddit is invalid.
     """
-    # Construct the URL for the Reddit API endpoint to get hot posts
     url = f"https://www.reddit.com/r/{subreddit}/hot.json"
     params = {'after': after, 'limit': 100}
-
-    # Define custom headers
+    
     headers = {
         'User-Agent': 'myRedditApp/0.0.1'  # Custom User-Agent to identify the client
     }
 
     try:
-        # Send GET request with custom headers and parameters
-        response = requests.get(url, headers=headers,
-                                params=params, allow_redirects=False)
+        response = requests.get(url, headers=headers, params=params, allow_redirects=False)
 
-        # Check if the response status code indicates success
         if response.status_code == 200:
             data = response.json()
             posts = data['data']['children']
@@ -47,9 +51,3 @@ def recurse(subreddit, hot_list=[], after=None):
             return None
     except requests.exceptions.RequestException:
         return None
-
-
-# Example usage
-subreddit = 'python'
-titles = recurse(subreddit)
-print(titles)
