@@ -10,7 +10,7 @@ def top_ten(subreddit):
     headers = {
         'User-Agent': 'myRedditApp/0.0.1' }
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, allow_redirects=False)
         data = response.json()
         posts = data['data']['children']
         for post in posts:
